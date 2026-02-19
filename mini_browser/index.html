@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Browser</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            margin: 0;
+        }
+
+        .topbar {
+            background: #020617;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #2563eb;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 60px);
+            border: none;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topbar">
+        <input id="query" placeholder="Search DuckDuckGo...">
+        <button onclick="search()">Go</button>
+    </div>
+
+    <iframe id="frame"></iframe>
+
+    <script>
+        function search() {
+            const q = document.getElementById("query").value;
+            if (!q) return;
+
+            document.getElementById("frame").src =
+                "/search?q=" + encodeURIComponent(q);
+        }
+
+        // Press Enter to search
+        document.getElementById("query").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                search();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
